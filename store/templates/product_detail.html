@@ -1,0 +1,43 @@
+{% include 'header/header.html' %}
+
+<div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+        
+        <!-- Product Image -->
+        <div class="rounded overflow-hidden shadow-lg">
+            <img src="{{ product.img_url }}" alt="{{ product.name }}"
+                 class="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <!-- Product Details -->
+        <div>
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ product.name }}</h1>
+            <p class="text-gray-600 text-lg mb-6 leading-relaxed">{{ product.description }}</p>
+
+            <!-- Pricing -->
+            <div class="mb-4">
+                <span class="text-3xl font-bold text-blue-600">₹{{ product.final_price }}</span>
+                {% if product.discount > 0 %}
+                    <span class="text-xl text-gray-400 line-through ml-3">₹{{ product.price }}</span>
+                    <span class="ml-2 text-green-600 font-semibold text-sm">{{ product.discount }}% OFF</span>
+                {% endif %}
+            </div>
+
+            <!-- Stock Info -->
+            <p class="text-sm text-gray-600 mb-2">Available Stock: 
+                <span class="font-medium">{{ product.stock }}</span>
+            </p>
+
+            <!-- CTA Button -->
+             <a href="{% url 'add_to_cart' product.id %}" 
+                class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            <button >
+                
+                 Add to Cart
+             
+            </button></a>
+        </div>
+    </div>
+</div>
+
+{% include 'footer/footer.html' %}

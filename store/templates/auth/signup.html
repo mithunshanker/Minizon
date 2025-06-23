@@ -1,0 +1,39 @@
+{% include '../header/header.html' %}
+{% load widget_tweaks %}
+
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 class="text-3xl font-extrabold text-center text-blue-700 mb-6">Create Your Account</h2>
+
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="text-sm text-red-500 mb-2">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form.visible_fields %}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">{{ field.label }}</label>
+                    {{ field|add_class:"w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+                    {% if field.errors %}
+                        <p class="text-sm text-red-500 mt-1">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition duration-200">
+                Sign Up
+            </button>
+        </form>
+
+        <p class="mt-6 text-sm text-center text-gray-600">
+            Already have an account?
+            <a href="{% url 'login' %}" class="text-blue-600 font-medium hover:underline">Login here</a>
+        </p>
+    </div>
+</div>
+
+{% include '../footer/footer.html' %}

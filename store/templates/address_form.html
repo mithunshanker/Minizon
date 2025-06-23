@@ -1,0 +1,12 @@
+{% include 'header/header.html' %}
+
+<div class="max-w-xl mx-auto py-10">
+    <h2 class="text-2xl font-bold mb-4">Enter Delivery Address</h2>
+    <form method="post" class="space-y-4 bg-white p-6 rounded shadow">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded">Continue</button>
+    </form>
+</div>
+
+{% include 'footer/footer.html' %}

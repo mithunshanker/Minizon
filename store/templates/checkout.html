@@ -1,0 +1,23 @@
+{% include 'header/header.html' %}
+
+<div class="max-w-3xl mx-auto px-4 py-10">
+    <h1 class="text-2xl font-bold mb-6">🚚 Shipping Address</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="space-y-4">
+            <input type="text" name="full_name" placeholder="Full Name" required class="w-full border px-4 py-2 rounded" value="{{ address.full_name|default_if_none:'' }}">
+            <input type="text" name="phone_number" placeholder="Phone Number" required class="w-full border px-4 py-2 rounded" value="{{ address.phone_number|default_if_none:'' }}">
+            <textarea name="adress" placeholder="Address" required class="w-full border px-4 py-2 rounded">{{ address.adress|default_if_none:'' }}</textarea>
+            <input type="text" name="pincode" placeholder="Pincode" required class="w-full border px-4 py-2 rounded" value="{{ address.pincode|default_if_none:'' }}">
+        </div>
+
+        <div class="mt-6 text-right">
+            <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+                Place Order
+            </button>
+        </div>
+    </form>
+</div>
+
+{% include 'footer/footer.html' %}

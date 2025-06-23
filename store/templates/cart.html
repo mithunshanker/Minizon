@@ -1,0 +1,53 @@
+{% include 'header/header.html' %}
+
+<div class="max-w-5xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold mb-6 text-center">🛒 Your Cart</h1>
+
+    {% if cart_items %}
+        <form method="post" action="{% url 'update_cart' %}">
+            {% csrf_token %}
+            <div class="space-y-4">
+                {% for item in cart_items %}
+                    <div class="flex justify-between items-center border p-4 rounded-lg bg-white shadow transition hover:shadow-md">
+                        <div class="flex items-center gap-4">
+                            <img src="{{ item.product.img_url }}" alt="{{ item.product.name }}" class="w-20 h-20 object-cover rounded">
+                            <div>
+                                <h3 class="text-lg font-semibold"><a href= "{% url 'product_detail' slug=item.product.slug %}">{{ item.product.name }}</a></h3>
+                                <p class="text-sm text-gray-500">Price: ₹{{ item.product.price|floatformat:2 }}</p>
+                                <p class="text-sm text-gray-500">Discount: {{ item.product.discount }}%</p>
+                                <p class="text-sm text-gray-500">Final Price: ₹{{ item.subtotal|floatformat:2 }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <input type="number" name="quantities_{{ item.id }}" value="{{ item.quantity }}" min="1" class="w-16 text-center border rounded px-2 py-1">
+                            <a href="{% url 'remove_from_cart' item.id %}" class="text-red-600 hover:text-red-800 font-medium">Remove</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="flex justify-between items-center mt-8">
+                <a href="{% url 'homepage' %}" class="text-blue-600 hover:underline">← Continue Shopping</a>
+                <div class="text-xl font-bold">
+                    Total: ₹{{ total|floatformat:2 }}
+                </div>
+            </div>
+
+            <div class="mt-6 text-right">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                    Update Cart
+                </button>
+            </div>
+            <div class="mt-4 text-right">
+                <a href="{% url 'address_form' %}" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
+                    Buy Now / Place Order
+                </a>
+            </div>
+        </form>
+    {% else %}
+        <p class="text-center text-gray-500 mt-20">Your cart is empty. <a href="{% url 'homepage' %}" class="text-blue-600 underline">Shop now</a></p>
+    {% endif %}
+</div>
+
+{% include 'footer/footer.html' %}

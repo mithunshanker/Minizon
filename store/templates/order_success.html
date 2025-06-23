@@ -1,0 +1,19 @@
+{% include 'header/header.html' %}
+
+<div class="max-w-xl mx-auto px-4 py-20 text-center">
+    <svg class="mx-auto mb-6 w-20 h-20 text-green-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+
+    <h1 class="text-3xl font-bold text-green-600 mb-4">Order Placed Successfully! 🎉</h1>
+    <p class="text-gray-600 mb-8">Thank you for shopping with us. Your order has been placed and will be processed shortly.</p>
+    <a href="{% url 'download_receipt' order.id %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mt-4 inline-block">
+        📄 Download Receipt (PDF)
+    </a>
+    
+    <a href="{% url 'homepage' %}" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+        Back to Home
+    </a>
+</div>
+
+{% include 'footer/footer.html' %}
